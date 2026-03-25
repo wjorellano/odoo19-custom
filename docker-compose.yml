@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    image: cloudlion-odoo19-enterprise:latest
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - ./enterprise:/mnt/enterprise-addons
+      - ./addons:/mnt/extra-addons
+      - ./odoo.conf:/etc/odoo/odoo.conf
+      - odoo-logs:/var/log/odoo
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+volumes:
+  odoo-db-data:
+  odoo-logs:
