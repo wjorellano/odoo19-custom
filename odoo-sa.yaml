@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: odoo-k8s-sa
+  namespace: default
+  annotations:
+    iam.gke.io/gcp-service-account: odoo-k8s-sa@votos-app-99.iam.gserviceaccount.com

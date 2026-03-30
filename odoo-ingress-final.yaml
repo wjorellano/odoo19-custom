@@ -1,0 +1,50 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: odoo-global-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: "odoo-lb-ip-v2"
+    networking.gke.io/managed-certificates: "cert-wjorellano,cert-notimalambo"
+spec:
+  rules:
+  - host: wjorellano.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: odoo-lb
+            port:
+              number: 80
+  - host: www.wjorellano.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: odoo-lb
+            port:
+              number: 80
+  - host: notimalambo.online
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: odoo-service-cliente2
+            port:
+              number: 80
+  - host: www.notimalambo.online
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: odoo-service-cliente2
+            port:
+              number: 80

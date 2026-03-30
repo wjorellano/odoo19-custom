@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="wompi_demo_data_1" model="wompi">
+        <field name="state">draft</field>
+        <field name="description">Demo Description</field>
+        
+    </record>
+    <record id="wompi_demo_data_2" model="wompi">
+        <field name="state">confirmed</field>
+        <field name="description">Demo Description</field>
+    </record>
+</odoo>

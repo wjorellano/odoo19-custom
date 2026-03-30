@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: odoo-config
+data:
+  odoo.conf: |
+    [options]
+    addons_path = /mnt/enterprise-addons,/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons
+    data_dir = /var/lib/odoo
+    db_host = 10.112.0.3
+    db_user = odoo
+    db_password = Cloudlion2026!
+    db_name = odoo_db
+    list_db = True
+    proxy_mode = True

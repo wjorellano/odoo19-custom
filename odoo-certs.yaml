@@ -1,0 +1,17 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: cert-wjorellano
+spec:
+  domains:
+    - wjorellano.com
+    - www.wjorellano.com
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: cert-notimalambo
+spec:
+  domains:
+    - notimalambo.online
+    - www.notimalambo.online

@@ -1,0 +1,14 @@
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: odoo-hc-config
+spec:
+  timeoutSec: 300
+  healthCheck:
+    checkIntervalSec: 15
+    timeoutSec: 5
+    healthyThreshold: 1
+    unhealthyThreshold: 10
+    type: HTTP
+    requestPath: /web/health
+    port: 8069
