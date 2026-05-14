@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="sale_kit_report.SaleKitBreakdownTable">
+        <div class="o_action_manager o_mrp_bom_report h-100 d-flex flex-column bg-view">
+
+            <div class="o_control_panel d-flex align-items-center p-3 border-bottom">
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-secondary me-3" t-on-click="goBack" title="Back to Quotation">
+                        <i class="fa fa-arrow-left me-1"/> Back
+                    </button>
+                    <h3 class="mb-0 text-primary">Sale Order Kit Breakdown</h3>
+                </div>
+            </div>
+
+            <div class="o_content flex-grow-1 overflow-auto p-4">
+                <table class="table table-borderless o_list_table">
+                    <thead class="border-bottom">
+                        <tr>
+                            <th>Product</th>
+                            <th>Type</th>
+                            <th class="text-end">Quantity</th>
+                            <th class="text-end">UoM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="visibleLines" t-as="line" t-key="line.id">
+                            <t t-set="isLine" t-value="line.type === 'line'"/>
+
+                            <tr class="border-bottom-0" t-att-class="{'table-active fw-bold': line.display_type === 'line_section'}">
+
+                                <t t-if="line.display_type === 'line_section'">
+                                    <td colspan="4" t-att-style="'padding-left: ' + (line.indent * 30 + 10) + 'px;'">
+                                        <t t-esc="line.product_name"/>
+                                    </td>
+                                </t>
+
+                                <t t-else="">
+                                    <td t-att-style="'padding-left: ' + (line.indent * 30 + 10) + 'px;'">
+                                        <div class="d-flex align-items-center">
+                                            <span t-if="line.has_bom"
+                                                  class="me-2"
+                                                  style="cursor: pointer; width: 15px; display: inline-block;"
+                                                  t-on-click="() => this.toggleExpand(line.id)">
+                                                <i t-att-class="state.expandedLines[line.id] ? 'fa fa-fw fa-caret-down' : 'fa fa-fw fa-caret-right'"/>
+                                            </span>
+                                            <span t-else="" style="width: 23px; display: inline-block;"/>
+
+                                            <span t-att-class="isLine ? 'text-info fw-bold' : 'text-info'">
+                                                <t t-esc="line.product_name"/>
+                                            </span>
+
+                                            <span t-if="line.has_bom" class="fa fa-cogs ms-2 text-muted" title="Kit/BoM"/>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <span class="text-muted"><t t-esc="line.item_type"/></span>
+                                    </td>
+
+                                    <td class="text-end"><t t-esc="line.quantity.toFixed(2)"/></td>
+                                    <td class="text-end"><t t-esc="line.uom"/></td>
+                                </t>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_sale_kit_overview" model="ir.actions.client">
+        <field name="name">Kit Breakdown</field>
+        <field name="tag">sale_kit_overview_action</field>
+    </record>
+
+    <record id="view_order_form_inherit_kit_overview" model="ir.ui.view">
+        <field name="name">sale.order.form.kit.overview</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="%(action_sale_kit_overview)d"
+                        type="action"
+                        class="oe_stat_button"
+                        icon="fa-list-alt"
+                        context="{'default_order_id': id}">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">Kit Report</span>
+                    </div>
+                </button>
+            </xpath>
+
+            <xpath expr="//header" position="inside">
+                <button name="action_export_kit_xlsx" string="Export Kit Breakdown" type="object" class="btn-primary"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

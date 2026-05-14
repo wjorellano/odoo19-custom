@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: odoo-staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: odoo-staging
+  template:
+    metadata:
+      labels:
+        app: odoo-staging
+    spec:
+      securityContext:
+        runAsUser: 101
+        runAsGroup: 101
+        fsGroup: 101
+      containers:
+      - name: odoo
+        image: us-central1-docker.pkg.dev/votos-app-99/odoo/odoo19-custom:latest
+        env:
+        - name: HOST
+          value: "10.112.0.6"
+        - name: USER
+          value: "odoo"
+        - name: PASSWORD
+          value: "Cloudlion2026!"
+        - name: DB_NAME
+          value: "odoo_staging_db"
+        - name: ODOO_DBFILTER
+          value: "^odoo_staging_db$"
+        - name: PROXY_MODE
+          value: "True"
+        - name: ADDONS_PATH
+          value: "/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons/github-addons"
+        ports:
+        - containerPort: 8069
+        volumeMounts:
+        - name: odoo-data
+          mountPath: /var/lib/odoo
+        - name: config-volume
+          mountPath: /etc/odoo/odoo.conf
+          subPath: odoo.conf
+      volumes:
+      - name: odoo-data
+        emptyDir: {}
+      - name: config-volume
+        configMap:
+          name: odoo-config
