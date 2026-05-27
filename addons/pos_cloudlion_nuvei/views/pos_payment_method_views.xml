@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pos_payment_method_view_form_inherit_nuvei" model="ir.ui.view">
+        <field name="name">pos.payment.method.form.inherit.nuvei</field>
+        <field name="model">pos.payment.method</field>
+        <field name="inherit_id" ref="point_of_sale.pos_payment_method_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="before">
+                <header>
+                    <button name="test_nuvei_connection"
+                        string="Test Connection"
+                        type="object"
+                        class="btn-primary"
+                        icon="fa-plug"
+                        invisible="use_payment_terminal != 'nuvei'"/>
+                    <button name="action_manual_batch_close"
+                        string="Manual Batch Close"
+                        type="object"
+                        class="btn-info"
+                        icon="fa-cube"
+                        invisible="use_payment_terminal != 'nuvei' or not nuvei_batch_close_manual or nuvei_batch_close_auto"
+                        confirm="This will close today's batch. Continue?"/>
+                </header>
+            </xpath>
+            <xpath expr="//field[@name='use_payment_terminal']" position="after">
+                <field name="nuvei_device_id"
+                    string="Device ID (PID)"
+                    groups="point_of_sale.group_pos_user"
+                    invisible="use_payment_terminal != 'nuvei'"
+                    required="use_payment_terminal == 'nuvei'"/>
+                <field name="nuvei_terminal_id"
+                    string="Terminal ID (TID)"
+                    groups="point_of_sale.group_pos_user"
+                    invisible="use_payment_terminal != 'nuvei'"
+                    required="use_payment_terminal == 'nuvei'"/>
+                <field name="nuvei_authentication_key"
+                    string="Authentication Key"
+                    groups="point_of_sale.group_pos_user"
+                    password="True"
+                    invisible="use_payment_terminal != 'nuvei'"
+                    required="use_payment_terminal == 'nuvei'"/>
+                <field name="nuvei_merchant_id"
+                    string="Merchant ID"
+                    groups="point_of_sale.group_pos_user"
+                    invisible="use_payment_terminal != 'nuvei'"
+                    required="use_payment_terminal == 'nuvei'"/>
+                <field name="nuvei_api_url"
+                    string="API URL"
+                    groups="point_of_sale.group_pos_user"
+                    invisible="use_payment_terminal != 'nuvei'"
+                    required="use_payment_terminal == 'nuvei'"/>
+                <field name="nuvei_test_mode"
+                    string="Test Mode"
+                    groups="point_of_sale.group_pos_user"
+                    invisible="use_payment_terminal != 'nuvei'"/>
+                <field name="nuvei_timeout"
+                    string="Timeout (seg)"
+                    groups="point_of_sale.group_pos_user"
+                    invisible="use_payment_terminal != 'nuvei'"/>
+                <separator string="Batch Close Configuration"
+                    invisible="use_payment_terminal != 'nuvei'"/>
+                <field name="nuvei_batch_close_manual"
+                    string="Enable Manual Close"
+                    groups="point_of_sale.group_pos_user"
+                    invisible="use_payment_terminal != 'nuvei'"/>
+                <field name="nuvei_batch_close_auto"
+                    string="Enable Automatic Close"
+                    groups="point_of_sale.group_pos_user"
+                    help="Enable automatic daily batch close at the time configured in Module Settings"
+                    invisible="use_payment_terminal != 'nuvei'"/>
+                <field name="nuvei_batch_close_last_date"
+                    string="Last Close"
+                    groups="point_of_sale.group_pos_user"
+                    invisible="use_payment_terminal != 'nuvei'"
+                    readonly="True"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_nuvei_batch_close_report_list" model="ir.ui.view">
+        <field name="name">nuvei.batch.close.report.tree</field>
+        <field name="model">nuvei.batch.close.report</field>
+        <field name="arch" type="xml">
+            <list string="Nuvei Batch Close Report" create="false" edit="false" delete="false">
+                <field name="date"/>
+                <field name="payment_method_id"/>
+                <field name="status"/>
+                <field name="sales_count"/>
+                <field name="sales_amount"/>
+                <field name="refunds_count"/>
+                <field name="refunds_amount"/>
+                <field name="net_count"/>
+                <field name="net_amount"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_nuvei_batch_close_report_form" model="ir.ui.view">
+        <field name="name">nuvei.batch.close.report.form</field>
+        <field name="model">nuvei.batch.close.report</field>
+        <field name="arch" type="xml">
+            <form string="Nuvei Batch Close Report" edit="false">
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <field name="payment_method_id"/>
+                        <field name="status"/>
+                    </group>
+                    <group>
+                        <field name="sales_count"/>
+                        <field name="sales_amount"/>
+                        <field name="refunds_count"/>
+                        <field name="refunds_amount"/>
+                        <field name="net_count"/>
+                        <field name="net_amount"/>
+                    </group>
+                    <group>
+                        <field name="raw_response"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_nuvei_batch_close_report" model="ir.actions.act_window">
+        <field name="name">Nuvei Batch Close Report</field>
+        <field name="res_model">nuvei.batch.close.report</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p>History of batch close requests sent to Nuvei from Odoo POS (Read-only).</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_nuvei_batch_close_config"
+        name="Nuvei Batch Close"
+        parent="point_of_sale.menu_point_config_product"
+        action="action_nuvei_batch_close_report"
+        sequence="100"
+        groups="base.group_system"/>
+</odoo>

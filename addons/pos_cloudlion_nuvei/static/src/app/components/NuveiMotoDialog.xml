@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  NuveiMotoDialog — diálogo modal para elegir el modo de entrada de tarjeta.
+  Aparece SOLO si nuvei_allow_moto está habilitado en el método de pago.
+  El cajero elige:
+    • "Card Present"  → pago normal (chip/tap/banda)
+    • "MOTO / Manual" → MOTOIndicator=true → el terminal pide datos manualmente
+-->
+<templates xml:space="preserve">
+  <t t-name="pos_cloudlion_nuvei.NuveiMotoDialog">
+    <Dialog title="title" size="'md'">
+      <t t-set-slot="body">
+        <div class="nuvei-moto-dialog">
+          <p class="nuvei-moto-dialog__description">
+            Select the card entry method for this transaction.
+          </p>
+
+          <!-- Card Present button -->
+          <button
+            class="nuvei-moto-dialog__btn nuvei-moto-dialog__btn--primary"
+            t-on-click="() => this.confirm(false)"
+          >
+            <i class="fa fa-credit-card me-2"/>
+            Card Present
+            <span class="nuvei-moto-dialog__hint">
+              (chip / tap / swipe)
+            </span>
+          </button>
+
+          <!-- MOTO / Manual Entry button -->
+          <button
+            class="nuvei-moto-dialog__btn nuvei-moto-dialog__btn--moto"
+            t-on-click="() => this.confirm(true)"
+          >
+            <i class="fa fa-keyboard-o me-2"/>
+            MOTO / Manual Entry
+            <span class="nuvei-moto-dialog__hint">
+              (type card number at keypad)
+            </span>
+          </button>
+        </div>
+      </t>
+    </Dialog>
+  </t>
+</templates>

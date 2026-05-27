@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_nuvei_invoice_payment_wizard" model="ir.ui.view">
+        <field name="name">nuvei.invoice.payment.wizard.form</field>
+        <field name="model">nuvei.invoice.payment.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Pay Terminal">
+                <!-- ✓ Loading indicator while processing -->
+                <div class="alert alert-warning" invisible="not nuvei_is_processing">
+                    <i class="fa fa-spinner fa-spin"></i>
+                    <strong>Processing payment...</strong>
+                    <br/>
+                    <field name="processing_message" class="oe_inline" readonly="1"/>
+                </div>
+
+                <!-- ✓ Main invoice information -->
+                <group>
+                    <field name="invoice_id" readonly="1"/>
+                    <field name="amount" readonly="1" string="Total Amount"/>
+                    <field name="payment_method_id" invisible="nuvei_is_processing"/>
+                </group>
+
+                <!-- ✓ Hidden fields (for backend reference only) -->
+                <field name="pos_product_id" invisible="1"/>
+                <field name="pos_config_id" invisible="1"/>
+                <field name="pos_session_id" invisible="1"/>
+                <field name="nuvei_exchange_id" invisible="1"/>
+                <field name="nuvei_last_status" invisible="1"/>
+                <field name="invoice_line_ids" invisible="1"/>
+
+                <footer>
+                    <!-- ✓ Pay button (visible when NOT processing) -->
+                    <button name="action_pay_terminal" string="Pay" type="object" class="btn-primary"
+                        invisible="nuvei_is_processing"/>
+
+                    <!-- ✓ Cancel Transaction button (visible when processing) - PROMINENT -->
+                    <button name="action_cancel_terminal" string="Cancel Transaction" type="object" class="btn-danger"
+                        invisible="not nuvei_is_processing" title="Force cancel the ongoing transaction"/>
+
+                    <!-- ✓ Close button (always visible) -->
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_nuvei_invoice_payment_wizard" model="ir.actions.act_window">
+        <field name="name">Pay Terminal</field>
+        <field name="res_model">nuvei.invoice.payment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Group for POS users with Nuvei payment terminal access -->
+    <record id="group_pos_nuvei_user" model="res.groups">
+        <field name="name">POS Nuvei Terminal User</field>
+        <field name="comment">Users in this group can perform sales through Point of Sale with Nuvei payment terminals.</field>
+        <!-- This group is a child of POS User group -->
+        <field name="implied_ids" eval="[(4, ref('point_of_sale.group_pos_user'))]"/>
+    </record>
+
+    <!-- Manager group for POS Nuvei (can manage configurations) -->
+    <record id="group_pos_nuvei_manager" model="res.groups">
+        <field name="name">POS Nuvei Terminal Manager</field>
+        <field name="comment">Users in this group can manage Nuvei payment terminal configurations and reports.</field>
+        <!-- This group includes POS Manager + Nuvei User -->
+        <field name="implied_ids" eval="[(4, ref('point_of_sale.group_pos_manager')), (4, ref('group_pos_nuvei_user'))]"/>
+    </record>
+</odoo>

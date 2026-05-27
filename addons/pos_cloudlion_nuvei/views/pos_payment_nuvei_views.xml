@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Vista de historial de transacciones Nuvei.
+    Permite consultar pagos procesados con Nuvei desde el backend
+    para auditoría, soporte y conciliación.
+-->
+<odoo>
+    <!-- Vista Tree (lista) de pagos Nuvei -->
+    <record id="pos_payment_nuvei_tree" model="ir.ui.view">
+        <field name="name">pos.payment.nuvei.tree</field>
+        <field name="model">pos.payment</field>
+        <field name="arch" type="xml">
+            <list string="Nuvei Transactions" default_order="create_date desc">
+                <field name="create_date" string="Date"/>
+                <field name="pos_order_id" string="POS Order"/>
+                <field name="payment_method_id" string="Payment Method"/>
+                <field name="amount" string="Amount"/>
+                <field name="nuvei_exchange_id" string="Exchange ID"/>
+                <field name="nuvei_reference_no" string="Terminal Ref."/>
+                <field name="nuvei_auth_code" string="Auth Code"/>
+                <field name="nuvei_card_type" string="Card Type"/>
+                <field name="nuvei_card_number" string="Card"/>
+                <field name="nuvei_entry_mode" string="Entry"/>
+                <field name="nuvei_approval_text" string="Status"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista Form de pago Nuvei -->
+    <record id="pos_payment_nuvei_form" model="ir.ui.view">
+        <field name="name">pos.payment.nuvei.form</field>
+        <field name="model">pos.payment</field>
+        <field name="arch" type="xml">
+            <form string="Nuvei Transaction Detail" create="false" edit="false">
+                <sheet>
+                    <group>
+                        <group string="Payment Information">
+                            <field name="create_date" string="Date"/>
+                            <field name="pos_order_id" string="POS Order"/>
+                            <field name="payment_method_id" string="Method"/>
+                            <field name="amount" string="Amount"/>
+                        </group>
+                        <group string="Datos Nuvei">
+                            <field name="nuvei_exchange_id" string="Exchange ID"/>
+                            <field name="nuvei_reference_no" string="Terminal Ref."/>
+                            <field name="nuvei_auth_code" string="Auth Code"/>
+                            <field name="nuvei_approval_text" string="Result"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Card">
+                            <field name="nuvei_card_type" string="Type"/>
+                            <field name="nuvei_card_number" string="Number"/>
+                            <field name="nuvei_entry_mode" string="Entry Mode"/>
+                        </group>
+                        <group string="Standard Fields">
+                            <field name="card_type"/>
+                            <field name="transaction_id"/>
+                            <field name="card_no"/>
+                        </group>
+                    </group>
+                    <group string="Terminal Receipt" col="1">
+                        <field name="nuvei_receipt_text" nolabel="1" widget="text"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción para ver transacciones Nuvei -->
+    <record id="action_pos_payment_nuvei" model="ir.actions.act_window">
+        <field name="name">Nuvei Transactions</field>
+        <field name="res_model">pos.payment</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('payment_method_id.use_payment_terminal', '=', 'nuvei')]</field>
+        <field name="context">{'search_default_group_by_date': 1}</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('pos_payment_nuvei_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('pos_payment_nuvei_form')})]"/>
+    </record>
+
+    <!-- Filtros de búsqueda -->
+    <record id="pos_payment_nuvei_search" model="ir.ui.view">
+        <field name="name">pos.payment.nuvei.search</field>
+        <field name="model">pos.payment</field>
+        <field name="arch" type="xml">
+            <search string="Search Nuvei Transactions">
+                <!-- Campos de búsqueda -->
+                <field name="nuvei_exchange_id"/>
+                <field name="nuvei_reference_no"/>
+                <field name="nuvei_auth_code"/>
+                <field name="nuvei_card_number"/>
+                <field name="pos_order_id"/>
+                <!-- Filtros predefinidos -->
+                <filter name="filter_approved" string="Approved"
+                    domain="[('nuvei_approval_text', 'ilike', 'APPROVED')]"/>
+                <filter name="filter_declined" string="Declined"
+                    domain="[('nuvei_approval_text', 'ilike', 'DECLINED')]"/>
+                <separator/>
+                <filter name="filter_today" string="Today"
+                    domain="[('create_date', '&gt;=', (context_today()).strftime('%Y-%m-%d'))]"/>
+                <filter name="filter_week" string="This Week"
+                    domain="[('create_date', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                <!-- Agrupación -->
+                <filter name="group_by_date" string="Date"
+                    context="{'group_by': 'create_date:day'}"/>
+                <filter name="group_by_method" string="Payment Method"
+                    context="{'group_by': 'payment_method_id'}"/>
+                <filter name="group_by_card_type" string="Card Type"
+                    context="{'group_by': 'nuvei_card_type'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Menú en Punto de Venta -->
+    <menuitem id="menu_nuvei_transactions"
+        name="Nuvei Transactions"
+        parent="point_of_sale.menu_point_of_sale"
+        action="action_pos_payment_nuvei"
+        sequence="30"/>
+</odoo>

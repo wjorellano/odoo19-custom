@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Nuvei Module Configuration Form View -->
+    <record id="nuvei_module_config_form" model="ir.ui.view">
+        <field name="name">nuvei.module.config.form</field>
+        <field name="model">nuvei.module.config</field>
+        <field name="arch" type="xml">
+            <form string="Nuvei Module Configuration">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="batch_close_enabled" widget="boolean"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Automatic Batch Close (Daily)">
+                            <field name="batch_close_hour"
+                                   help="Time of day when batch close should execute for all terminals (0.0-23.999).
+                                   Example: 23.983 = 11:59 PM"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Menu Action to Access Settings -->
+    <record id="action_nuvei_module_config" model="ir.actions.act_window">
+        <field name="name">Nuvei Module Settings</field>
+        <field name="res_model">nuvei.module.config</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Menu Item (optional - uncomment if you want it in the menu) -->
+    <!-- <menuitem
+        id="menu_nuvei_config"
+        name="Nuvei Settings"
+        action="action_nuvei_module_config"
+        parent="point_of_sale.menu_point_root"
+        sequence="50"
+    /> -->
+</odoo>

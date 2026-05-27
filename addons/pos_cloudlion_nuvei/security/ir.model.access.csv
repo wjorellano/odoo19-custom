@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pos_payment_nuvei_user,pos.payment.nuvei.user,point_of_sale.model_pos_payment,point_of_sale.group_pos_user,1,1,1,0
+access_pos_payment_method_nuvei_user,pos.payment.method.nuvei.user,point_of_sale.model_pos_payment_method,point_of_sale.group_pos_user,1,1,0,0
+access_pos_payment_method_nuvei_manager,pos.payment.method.nuvei.manager,point_of_sale.model_pos_payment_method,point_of_sale.group_pos_manager,1,1,1,1
+access_nuvei_batch_close_report_user,nuvei.batch.close.report.user,pos_cloudlion_nuvei.model_nuvei_batch_close_report,point_of_sale.group_pos_user,1,0,0,0
+access_nuvei_batch_close_report_manager,nuvei.batch.close.report.manager,pos_cloudlion_nuvei.model_nuvei_batch_close_report,point_of_sale.group_pos_manager,1,1,1,1
+access_nuvei_invoice_payment_wizard_user,nuvei.invoice.payment.wizard.user,pos_cloudlion_nuvei.model_nuvei_invoice_payment_wizard,account.group_account_user,1,1,1,0
+access_nuvei_invoice_payment_wizard_pos_user,nuvei.invoice.payment.wizard.pos.user,pos_cloudlion_nuvei.model_nuvei_invoice_payment_wizard,point_of_sale.group_pos_user,1,1,1,0

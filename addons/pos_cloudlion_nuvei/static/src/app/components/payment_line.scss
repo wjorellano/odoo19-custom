@@ -1,0 +1,16 @@
+/** Hide the "Force done" button for Nuvei payments */
+
+/* General rule: hide all force done buttons in payment dialogs */
+.payment-summary .button.send_force_done {
+    display: none !important;
+}
+
+/* Alternative: If it's inside a specific payment line, hide it */
+.paymentline.electronic_payment .button.send_force_done {
+    display: none !important;
+}
+
+/* For Nuvei payment method specifically */
+.paymentline[data-payment-method="nuvei"] .button.send_force_done {
+    display: none !important;
+}

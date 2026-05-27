@@ -1,0 +1,156 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * pos_cloudlion_nuvei
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-02 00:00+0000\n"
+"PO-Revision-Date: 2026-03-02 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment_method__nuvei_device_id
+msgid "Device ID (PID)"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment_method__nuvei_terminal_id
+msgid "Terminal ID (TID)"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment_method__nuvei_authentication_key
+msgid "Authentication Key"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment_method__nuvei_merchant_id
+msgid "Merchant ID"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment_method__nuvei_api_url
+msgid "API URL"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment_method__nuvei_test_mode
+msgid "Test Mode"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment_method__nuvei_timeout
+msgid "Timeout (seconds)"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment_method__nuvei_latest_response
+msgid "Latest Response"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment__nuvei_exchange_id
+msgid "Nuvei Exchange ID"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment__nuvei_reference_no
+msgid "Nuvei Reference No."
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment__nuvei_card_type
+msgid "Nuvei Card Type"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment__nuvei_card_number
+msgid "Nuvei Card Number"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment__nuvei_auth_code
+msgid "Nuvei Auth Code"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment__nuvei_entry_mode
+msgid "Nuvei Entry Mode"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment__nuvei_approval_text
+msgid "Nuvei Approval Text"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: model:ir.model.fields,field_description:pos_cloudlion_nuvei.field_pos_payment__nuvei_receipt_text
+msgid "Nuvei Receipt"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: code:addons/pos_cloudlion_nuvei/models/pos_payment_method.py
+msgid "Missing Nuvei configuration fields"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: code:addons/pos_cloudlion_nuvei/models/pos_payment_method.py
+msgid "Valid credentials!"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: code:addons/pos_cloudlion_nuvei/models/pos_payment_method.py
+msgid "Nuvei Connection"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: code:addons/pos_cloudlion_nuvei/models/pos_payment_method.py
+msgid "Verification failed: %(msg)s"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: code:addons/pos_cloudlion_nuvei/models/pos_payment_method.py
+msgid "No previous transactions to void"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: code:addons/pos_cloudlion_nuvei/static/src/app/utils/payment/payment_nuvei.js
+msgid "Could not connect to Odoo server. Check your internet connection."
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: code:addons/pos_cloudlion_nuvei/static/src/app/utils/payment/payment_nuvei.js
+msgid "Cannot process transactions with negative amount."
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: code:addons/pos_cloudlion_nuvei/static/src/app/utils/payment/payment_nuvei.js
+msgid "Transaction was cancelled due to terminal inactivity."
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: code:addons/pos_cloudlion_nuvei/static/src/app/utils/payment/payment_nuvei.js
+msgid "Transaction was cancelled from the terminal."
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: code:addons/pos_cloudlion_nuvei/static/src/app/utils/payment/payment_nuvei.js
+msgid "Internal error: missing exchange_id for the transaction."
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: code:addons/pos_cloudlion_nuvei/static/src/app/utils/payment/payment_nuvei.js
+msgid "Nuvei Error"
+msgstr ""
+
+#. module: pos_cloudlion_nuvei
+#: code:addons/pos_cloudlion_nuvei/static/src/app/utils/payment/payment_nuvei.js
+msgid "Cannot reverse: missing original transaction reference."
+msgstr ""
